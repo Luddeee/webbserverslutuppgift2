@@ -28,14 +28,17 @@ const aSongs = document.getElementById('allSongs');
 
 /* console.log("ogaboga")
 console.log(songs) */
-// Keep track of song
+
+//Håller koll på vilken sång som är just nu värdet är startsånger
 let songIndex = 2;
 console.log("loadsongs afdw" + songs)
-// Initially load song details into DOM
+
+
+//Laddar låtarna som finns
 loadSong(songs[songIndex]);
 songsinfo.innerText = songs.name; //skriver låtarna i infoboxen
 
-// Update song details
+//Uppdatterar vilken låt det är och detaljerna till
 function loadSong(song) {
   title.innerText = song.name;
   audio.src = `music/${song.songfile}.mp3`;
@@ -43,7 +46,7 @@ function loadSong(song) {
   console.log("loadsongs" + song)
 }
 
-// Play song
+//Spelar låten
 function playSong() {
   musicContainer.classList.add('play');
   playBtn.querySelector('i.fas').classList.remove('fa-play');
@@ -52,7 +55,7 @@ function playSong() {
   audio.play();
 }
 
-// Pause song
+//Pausar låten
 function pauseSong() {
   musicContainer.classList.remove('play');
   playBtn.querySelector('i.fas').classList.add('fa-play');
@@ -61,7 +64,7 @@ function pauseSong() {
   audio.pause();
 }
 
-// Previous song
+//Låten innan
 function prevSong() {
   songIndex--;
 
@@ -74,7 +77,7 @@ function prevSong() {
   playSong();
 }
 
-// Next song
+//Nästa låt
 function nextSong() {
   songIndex++;
 
@@ -88,7 +91,7 @@ function nextSong() {
 }
 
 let controller = 1
-//bring down or up menu
+//tar up och ner menyn
 function allsongs(){
 	if(controller == 1){
 		infocontainer.classList.add('down');
@@ -107,14 +110,14 @@ function allsongs(){
 	}
 }
 
-// Update progress bar
+//Uppdaterar var du är i låten
 function updateProgress(e) {
   const { duration, currentTime } = e.srcElement;
   const progressPercent = (currentTime / duration) * 100;
   progress.style.width = `${progressPercent}%`;
 }
 
-// Set progress bar
+//Sätter där du är i låten. (det som visas)
 function setProgress(e) {
   const width = this.clientWidth;
   const clickX = e.offsetX;
@@ -123,7 +126,7 @@ function setProgress(e) {
   audio.currentTime = (clickX / width) * duration;
 }
 
-//get duration & currentTime for Time of song
+//tar vilken tidpunkt du är vid
 function DurTime (e) {
 	const {duration,currentTime} = e.srcElement;
 	var sec;
@@ -152,10 +155,10 @@ function DurTime (e) {
 
 	get_sec (currentTime,sec);
 
-	// change currentTime DOM
+	//ändrar tiden du är på
 	currTime.innerHTML = min +':'+ sec;
 
-	// define minutes duration
+	//definierar var du är(tiden)(minuten)
 	let min_d = (isNaN(duration) === true)? '0':
 		Math.floor(duration/60);
 	 min_d = min_d <10 ? '0'+min_d:min_d;
@@ -177,7 +180,7 @@ function DurTime (e) {
 		 }
 	} 
 
-	// define seconds duration
+	//definierar sekunden du är på
 	
 	get_sec_d (duration);
 
@@ -197,23 +200,23 @@ playBtn.addEventListener('click', () => {
   }
 });
 
-// Change song
+//Byt låt
 prevBtn.addEventListener('click', prevSong);
 nextBtn.addEventListener('click', nextSong);
 
-// Time/song update
+//uppdaterar tidpunkten
 audio.addEventListener('timeupdate', updateProgress);
 
-// Click on progress bar
+// där du trycker att du ska vara.(tidpunkten i låten)
 progressContainer.addEventListener('click', setProgress);
 
-// Song ends
+//Låtens slut
 audio.addEventListener('ended', nextSong);
 
-// Time of song
+//var du är i låten
 audio.addEventListener('timeupdate',DurTime);
 
-//bring up / down menu
+//tar upp/ner menyn
 aSongs.addEventListener('click', allsongs);
 
 }

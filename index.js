@@ -4,7 +4,7 @@ const uri = process.env.MONGO;
 const client = new MongoClient(uri,{useUnifiedTopology: true});
 const cookieParser = require("cookie-parser");
 
-
+//ser till så att allt fungerar
 async function run(){
     try{
 
@@ -14,6 +14,7 @@ async function run(){
     const songs = database.collection("songs");
     const users = database.collection('users');
 
+    //startar express applikationen
     const express = require("express");
     const app = express();
 
@@ -29,7 +30,7 @@ async function run(){
     app.use(express.urlencoded({extended:false}));
     app.listen(3400);
 
-
+    //Läser in routes
     require("./routes.js")(app,songs,users);
     
     }

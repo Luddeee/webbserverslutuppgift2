@@ -1,9 +1,9 @@
-const{ObjectId} = require("mongodb");
-const jwt = require("jsonwebtoken");
-const cookieParser = require("cookie-parser");
-const mod = require("./modules");
-const bcrypt = require("bcryptjs");
-const secret = process.env.secret;
+const{ObjectId} = require("mongodb"); //använder mongodb
+const jwt = require("jsonwebtoken"); //använder jsonwebtoken se modules.js kommentar
+const cookieParser = require("cookie-parser"); //se modules.js kommentar
+const mod = require("./modules"); //använder modules.js filen
+const bcrypt = require("bcryptjs"); //använder bcrypt
+const secret = process.env.secret; //se modules.js kommentar
 
 module.exports = function(app,songs,users){
     app.get("/",function(req,res){ 

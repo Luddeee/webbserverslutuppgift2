@@ -1,7 +1,9 @@
-const cookieParser = require("cookie-parser");
-const jwt = require("jsonwebtoken");
-const secret = process.env.secret;
+const cookieParser = require("cookie-parser"); //kakorna
+const jwt = require("jsonwebtoken"); //jsonwebtoken som läggs i kakorna och ser till så att du förblir inloggad i 15 minuter. (se kommentar nedan) även den du måste ha för att komma in
+const secret = process.env.secret; //säkerhetsnyckel (som streamernyckel i obs)
 
+
+//kollar om användaren existerar
 async function userExist(req, res, next)
 {
     try {
@@ -20,12 +22,15 @@ async function userExist(req, res, next)
     }
 }
 
+//genererar din jsonwebtoken
 function generateToken(user)
 {
     let {_id} = user;
-    let token = jwt.sign({_id}, secret, {expiresIn:600});
+    let token = jwt.sign({_id}, secret, {expiresIn:600}); //sätter attribut för token
     return token;
 }
+
+//kollar om det finns en token
 function checkToken(req, res, next)
 {
     try 
@@ -44,6 +49,8 @@ function checkToken(req, res, next)
     }
 }
 
+
+//ser till så att du inte kan skriva in kod i forms (säkerhet)
 function fixString(text) {
     var map = {
       '&': '&amp;',
@@ -57,4 +64,4 @@ function fixString(text) {
     return text.replace(/[&<>"']/g, function(m) { return map[m]; });
 }
 
-module.exports = {userExist, generateToken, checkToken, fixString};
+module.exports = {userExist, generateToken, checkToken, fixString}; //skickar tillbaks
