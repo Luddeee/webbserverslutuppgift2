@@ -41,8 +41,8 @@ songsinfo.innerText = songs.name; //skriver låtarna i infoboxen
 //Uppdatterar vilken låt det är och detaljerna till
 function loadSong(song) {
   title.innerText = song.name;
-  audio.src = `music/${song.songfile}.mp3`;
-  cover.src = `images/${song.image}.jpg`;
+  audio.src = `${song.songfile}.mp3`;
+  cover.src = `../${song.image}.jpg`;
   console.log("loadsongs" + song)
 }
 

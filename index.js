@@ -27,6 +27,8 @@ async function run(){
     app.use(cookieParser());
 
     app.use(express.static("static"));
+    app.use(express.static("static/music"));
+    app.use(express.static("static/images"));
     app.use(express.urlencoded({extended:false}));
     app.listen(3400);
 
